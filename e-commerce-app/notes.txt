@@ -1,0 +1,39 @@
+useEffect(() => {
+    if (data?.data) {
+      setProducts((products) => [...products, ...data?.data]);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    function infiniteScroll() {
+      if (
+        window.innerHeight + document.documentElement.scrollTop + 1 >=
+        document.documentElement.scrollHeight
+      ) {
+        setPage((page) => page + 1);
+      }
+    }
+
+    window.addEventListener("scroll", infiniteScroll);
+
+    if (page === lastPage) {
+      window.removeEventListener("scroll", infiniteScroll);
+    }
+
+    return () => window.removeEventListener("scroll", infiniteScroll);
+  }, [page, lastPage]);
+
+Customers
+id email phone password confim_password address(null) 
+
+product_reviews
+product_id customer_id review
+
+cart
+id product_id customer_id qty date
+
+product_like
+customer_id product_id
+
+product_rating
+customer_id product_id rating

@@ -50,4 +50,14 @@ class Product extends Model
     {
         return $this->belongsToMany(Color::class, "product_colors");
     }
+
+    public function like()
+    {
+        return $this->belongsToMany(Customer::class, "product_likes");
+    }
+
+    public function cart()
+    {
+        return $this->belongsToMany(Customer::class, "carts");
+    }
 }

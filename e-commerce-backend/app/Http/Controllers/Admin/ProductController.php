@@ -99,6 +99,8 @@ class ProductController extends Controller
     {
         if (Auth::user()->can('create')) {
             $data = $request->all();
+            // slug
+            $data["slug"] = time() . $data["name"];
             $colors = $request->colors;
             // take out data that's not necessary
             $data = Arr::except($data, ["colors"]);
@@ -145,6 +147,9 @@ class ProductController extends Controller
     {
         if (Auth::user()->can('update')) {
             $data = Arr::except($request->all(), ["colors"]);
+            // slug
+            $data["slug"] = time() . $data["name"];
+
             if ($file = $request->file("image")) {
                 $image = new ImageStore();
                 $image->deleteImage("public", "products", $product->image);
